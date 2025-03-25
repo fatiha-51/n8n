@@ -34,5 +34,21 @@ COPY --from=builder / /
 RUN rm -rf /tmp/v8-compile-cache*
 
 WORKDIR /home/node
-ENV NODE_ICU_DATA /usr/local/lib/node_modules/full-icu
+ENV NODE_ICU_DATA=/usr/local/lib/node_modules/full-icu
+
+# Ajout des variables d'environnement
+ENV N8N_WEBHOOK_URL="https://webhook-proxy-an1u.onrender.com"
+ENV N8N_PROTOCOL="http"
+ENV N8N_PORT=5678
+ENV DB_TYPE="sqlite"
+ENV GENERIC_TIMEZONE="Europe/Paris"
+
+# Définition des chemins locaux pour les fichiers N8N
+ENV N8N_USER_FOLDER="/data"
+ENV N8N_PATH_DATA="/data"
+ENV N8N_PATH_EXECUTIONS="/data/executions"
+ENV N8N_PATH_WORKFLOWS="/data/workflows"
+ENV N8N_PATH_CREDENTIALS="/data/credentials"
+
+VOLUME ["/data"]
 EXPOSE 5678/tcp
